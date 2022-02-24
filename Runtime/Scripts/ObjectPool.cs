@@ -50,6 +50,8 @@ namespace KaynirGames.Pool
                 {
                     _destroyAction.Invoke(_objects.Dequeue());
                 }
+
+                return;
             }
 
             _objects.Clear();

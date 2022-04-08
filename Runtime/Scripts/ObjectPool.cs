@@ -8,18 +8,18 @@ namespace KaynirGames.Pool
         private Queue<T> _objects;
 
         private Func<T> _createFunc;
-        private Action<T> _getAction;
+        private Action<T> _takeAction;
         private Action<T> _returnAction;
         private Action<T> _destroyAction;
 
         public ObjectPool(
             Func<T> createFunc,
-            Action<T> getAction = null,
+            Action<T> takeAction = null,
             Action<T> returnAction = null,
             Action<T> destroyAction = null)
         {
             _createFunc = createFunc ?? throw new ArgumentNullException(nameof(createFunc));
-            _getAction = getAction;
+            _takeAction = takeAction;
             _returnAction = returnAction;
             _destroyAction = destroyAction;
             _objects = new Queue<T>();
@@ -31,7 +31,7 @@ namespace KaynirGames.Pool
                 ? _objects.Dequeue()
                 : _createFunc();
 
-            _getAction?.Invoke(obj);
+            _takeAction?.Invoke(obj);
 
             return obj;
         }
@@ -50,8 +50,6 @@ namespace KaynirGames.Pool
                 {
                     _destroyAction.Invoke(_objects.Dequeue());
                 }
-
-                return;
             }
 
             _objects.Clear();

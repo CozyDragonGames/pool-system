@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "displayName": "Pool System",
   "description": "Простая система для пула объектов.",
-  "path": "CozyDragon/Pool System"
+  "path": "CozyDragon/Pool System",
   "unity": "2020.3",
   "keywords": [
     "cozydragon, pool, pooling"

@@ -1,4 +1,4 @@
-namespace KaynirGames.Pool
+namespace CozyDragon.PoolSystem
 {
     public interface IPoolable<T>
     {

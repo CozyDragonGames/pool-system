@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace KaynirGames.Pool
+namespace CozyDragon.PoolSystem
 {
     public class ObjectPool<T> : IObjectPool<T>
     {

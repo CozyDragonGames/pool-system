@@ -1,16 +1,16 @@
 {
-  "name": "com.kaynirgames.pool",
+  "name": "com.cozydragon.poolsystem",
   "version": "1.0.0",
-  "displayName": "Simple Pool System",
+  "displayName": "Pool System",
   "description": "Простая система для пула объектов.",
+  "path": "CozyDragon/Pool System"
   "unity": "2020.3",
   "keywords": [
-    "kaynir, kaynirgames, pool"
+    "cozydragon, pool, pooling"
   ],
   "author": {
     "name": "Denis Znov",
     "email": "kaynir.games@gmail.com",
-    "url": "https://github.com/KaynirGames"
-  },
-  "type": "library"
+    "url": "https://github.com/CozyDragonGames/simple-pool-system"
+  }
 }

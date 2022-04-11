@@ -1,6 +1,6 @@
 {
-    "name": "com.kaynirgames.pool",
-    "rootNamespace": "KaynirGames.Pool",
+    "name": "com.cozydragon.poolsystem",
+    "rootNamespace": "CozyDragon.PoolSystem",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

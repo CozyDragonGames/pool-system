@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "displayName": "Pool System",
   "description": "Простая система для пула объектов.",
-  "path": "CozyDragon/Pool System",
   "unity": "2020.3",
   "keywords": [
-    "cozydragon, pool, pooling"
+    "cozydragon, pool"
   ],
   "author": {
     "name": "Denis Znov",
     "email": "kaynir.games@gmail.com",
-    "url": "https://github.com/CozyDragonGames/simple-pool-system"
+    "url": "https://github.com/CozyDragonGames/pool-system"
   }
 }

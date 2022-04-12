@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CozyDragon.PoolSystem
 {
-    public class MonoPool<T> : MonoBehaviour, IObjectPool<T> where T : MonoBehaviour
+    public class MonoPool<T> : MonoBehaviour, IObjectPool<T> where T : MonoBehaviour, IPoolable<T>
     {
         [SerializeField] protected T _prefab = null;
 
@@ -17,7 +17,7 @@ namespace CozyDragon.PoolSystem
         {
             T obj = _objects.Count > 0
                 ? _objects.Dequeue()
-                : Instantiate(_prefab, transform);
+                : Create();
 
             obj.gameObject.SetActive(true);
 
@@ -37,6 +37,14 @@ namespace CozyDragon.PoolSystem
             {
                 Destroy(_objects.Dequeue().gameObject);
             }
+        }
+
+        protected virtual T Create()
+        {
+            T obj = Instantiate(_prefab, transform);
+            obj.SetPool(this);
+
+            return obj;
         }
     }
 }

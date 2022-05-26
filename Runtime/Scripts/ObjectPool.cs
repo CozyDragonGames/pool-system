@@ -1,58 +1,46 @@
-using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace CozyDragon.PoolSystem
 {
-    public class ObjectPool<T> : IObjectPool<T>
+    public class ObjectPool
     {
-        private Queue<T> _objects;
+        private PoolableObject _prefab;
+        private Transform _poolHolder;
 
-        private Func<T> _createFunc;
-        private Action<T> _takeAction;
-        private Action<T> _returnAction;
-        private Action<T> _destroyAction;
+        private Queue<PoolableObject> _objects;
 
-        public ObjectPool(
-            Func<T> createFunc,
-            Action<T> takeAction = null,
-            Action<T> returnAction = null,
-            Action<T> destroyAction = null)
+        public ObjectPool(Transform parent, PoolableObject prefab)
         {
-            _createFunc = createFunc ?? throw new ArgumentNullException(nameof(createFunc));
-            _takeAction = takeAction;
-            _returnAction = returnAction;
-            _destroyAction = destroyAction;
-            _objects = new Queue<T>();
+            _prefab = prefab;
+            _objects = new Queue<PoolableObject>();
+            _poolHolder = new GameObject($"{prefab.name}Pool").transform;
+            _poolHolder.SetParent(parent);
         }
 
-        public T Take()
+        public PoolableObject Take()
         {
-            T obj = _objects.Count > 0
+            PoolableObject obj = _objects.Count > 0
                 ? _objects.Dequeue()
-                : _createFunc();
+                : CreateObject();
 
-            _takeAction?.Invoke(obj);
+            obj.gameObject.SetActive(true);
 
             return obj;
         }
 
-        public void Return(T obj)
+        public void Release(PoolableObject obj)
         {
-            _returnAction?.Invoke(obj);
+            obj.gameObject.SetActive(false);
             _objects.Enqueue(obj);
         }
 
-        public void Clear()
+        private PoolableObject CreateObject()
         {
-            if (_destroyAction != null)
-            {
-                for (int i = 0; i < _objects.Count; i++)
-                {
-                    _destroyAction.Invoke(_objects.Dequeue());
-                }
-            }
+            PoolableObject obj = Object.Instantiate(_prefab, _poolHolder);
+            obj.SetObjectPool(this);
 
-            _objects.Clear();
+            return obj;
         }
     }
 }
